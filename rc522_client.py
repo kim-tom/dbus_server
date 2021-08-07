@@ -16,7 +16,15 @@ class RC522Client(dbus.service.Object):
         bus.add_signal_receiver(
             self.get_RFID, dbus_interface=INTERFACE, bus_name=BUS_NAME, path=OBJECT_PATH)
         self.loop = GObject.MainLoop()
-    def wait_for_tag(self):
+        self.id_ = None
+    def wait_for_tag(self, timeout = 0):
+        if not self.loop.get_context().acquire():
+            raise "Cannot acquire."
+        while self.loop.get_context().pending():
+            self.loop.get_context().dispatch()
+        self.id_ = None
+        if timeout != 0:
+            GLib.timeout_add(timeout, self.loop.quit)
         self.loop.run()
     def get_RFID(self, result):
         self.id_ = result

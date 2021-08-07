@@ -15,7 +15,7 @@ class RC522Server(dbus.service.Object):
         super(RC522Server, self).__init__(bus_name, OBJECT_PATH)
         self.rc522 = RC522()
     def wait_for_tag(self):
-        result = str(self.rc522.get_RFID(0))
+        result = str(self.rc522.get_RFID(0)).strip("[]")
         self.get_RFID(result)
     @dbus.service.signal(INTERFACE, signature='s')
     def get_RFID(self, result):
