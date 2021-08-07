@@ -4,6 +4,7 @@ import dbus.service
 from gi.repository import GObject, GLib
 import RPi.GPIO as GPIO
 
+dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
 BUS_NAME = 'jp.kimura.SWITCHService'
 OBJECT_PATH = '/jp/kimura/SWITCHServer'
 INTERFACE = 'jp.kimura.SWITCH'
@@ -17,7 +18,6 @@ for pin in PINS:
 
 class SWITCHServer(dbus.service.Object):
     def __init__(self):
-        dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
         bus = dbus.SessionBus()
         bus_name = dbus.service.BusName(BUS_NAME, bus)
         super(SWITCHServer, self).__init__(bus_name, OBJECT_PATH)

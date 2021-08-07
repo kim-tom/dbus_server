@@ -2,13 +2,13 @@ import dbus
 import dbus.mainloop.glib
 import dbus.service
 
+dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
 BUS_NAME = 'jp.kimura.SWITCHService'
 OBJECT_PATH = '/jp/kimura/SWITCHServer'
 INTERFACE = 'jp.kimura.SWITCH'
 
 class SWITCHClient(dbus.service.Object):
     def __init__(self):
-        dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
         bus = dbus.SessionBus()
         bus_name = dbus.service.BusName(BUS_NAME, bus)
         super(SWITCHClient, self).__init__(bus_name, OBJECT_PATH)

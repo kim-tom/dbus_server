@@ -3,13 +3,13 @@ import dbus
 import dbus.mainloop.glib
 import dbus.service
 
+dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
 BUS_NAME = 'jp.kimura.RC522Service'
 OBJECT_PATH = '/jp/kimura/RC522Server'
 INTERFACE = 'jp.kimura.RC522'
 
 class RC522Server(dbus.service.Object):
     def __init__(self):
-        dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
         bus = dbus.SessionBus()
         bus_name = dbus.service.BusName(BUS_NAME, bus)
         super(RC522Server, self).__init__(bus_name, OBJECT_PATH)

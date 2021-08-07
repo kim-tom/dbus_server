@@ -7,12 +7,6 @@ BUS_NAME = 'jp.kimura.LINEService'
 OBJECT_PATH = '/jp/kimura/LINEServer'
 INTERFACE = 'jp.kimura.LINE'
 
-url = 'https://api.line.me/v2/bot/message/broadcast'
-with open("access_token.txt") as f:
-    access_token = f.read().strip()
-header = {'Content-Type': 'application/json',
-          'Authorization': access_token}
-
 class LINEClient(dbus.service.Object):
     def __init__(self):
         bus = dbus.SessionBus()

@@ -6,13 +6,13 @@ from gi.repository import GObject, GLib
 
 UNLOCKED_DEG = 175
 
+dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
 BUS_NAME = 'jp.kimura.DS3225Service'
 OBJECT_PATH = '/jp/kimura/DS3225Server'
 INTERFACE = 'jp.kimura.DS3225'
 
 class DS3225Server(dbus.service.Object):
     def __init__(self):
-        dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
         bus = dbus.SessionBus()
         bus_name = dbus.service.BusName(BUS_NAME, bus)
         super(DS3225Server, self).__init__(bus_name, OBJECT_PATH)
