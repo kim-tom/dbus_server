@@ -32,6 +32,7 @@ class LINEServer(dbus.service.Object):
           ]
        }
        res = requests.post(url, headers = header, data = json.dumps(payload))
+       print(res.text)
        return res.text
 
 if __name__ == '__main__':
