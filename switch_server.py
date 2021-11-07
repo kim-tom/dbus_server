@@ -12,7 +12,7 @@ GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 #  2: Lead Switch
 # 26: Key Switch
-PINS = set([26, 2])
+PINS = {26, 2}
 for pin in PINS:
    GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
